@@ -61,16 +61,16 @@ const AlbumPage = () => {
         </Col>
         <Col md={8} className="p-5">
           <Row>
-            <Col md={10} className="mb-5" id="trackList">
+            <Col md={10} className="mb-5 w-100" id="trackList">
               {album &&
                 album.tracks.data.map((track) => (
-                  <Row key={track.id} className="justify-content-center">
+                  <Row key={track.id} className="justify-content-center w-100">
                     <Col xs={2} className="pe-0">
                       <button className="addToFav">
                         <i className="far fa-heart"></i>
                       </button>
                     </Col>
-                    <Col xs={10} className="ps-0">
+                    <Col xs={10} className="ps-0 ">
                       <div className="py-3 trackHover">
                         <Link
                           to="/"
@@ -89,7 +89,7 @@ const AlbumPage = () => {
                       </div>
                     </Col>
                   </Row>
-                ))}{" "}
+                ))}
             </Col>
           </Row>
         </Col>

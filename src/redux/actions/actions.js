@@ -2,6 +2,11 @@ export const ADD_TO_ROCK = "ADD_TO_ROCK";
 export const ADD_TO_POP = "ADD_TO_POP";
 export const ADD_TO_HIPHIP = "ADD_TO_HIPHIP";
 
+// const for FAVREDUCERS =>>>
+
+export const ADD_TO_FAV = "ADD_TO_FAV";
+export const REMOVE_FROM_FAV = "REMOVE_FROM_FAV";
+
 let headers = new Headers({
   // sets the headers
   "X-RapidAPI-Host": "deezerdevs-deezer.p.rapidapi.com",
