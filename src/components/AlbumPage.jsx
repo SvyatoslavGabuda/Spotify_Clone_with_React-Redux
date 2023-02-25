@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
+import { ADD_TO_FAV, ADD_TO_PLAYER, REMOVE_FROM_FAV } from "../redux/actions/actions";
 import MainLinks from "./MainLinks";
 
 const AlbumPage = () => {
   const params = useParams();
   const albumId = params.id;
   const [album, setAlbum] = useState();
+  const dispatch = useDispatch();
+  const favSongs = useSelector((state) => state.fav.favSongs);
 
   const AlbumFetch = async () => {
     let headers = new Headers({
@@ -66,8 +70,22 @@ const AlbumPage = () => {
                 album.tracks.data.map((track) => (
                   <Row key={track.id} className="justify-content-center w-100">
                     <Col xs={2} className="pe-0">
-                      <button className="addToFav">
+                      <button
+                        className="addToFav"
+                        onClick={() =>
+                          favSongs?.includes(track.id)
+                            ? dispatch({ type: REMOVE_FROM_FAV, payload: track.id })
+                            : dispatch({ type: ADD_TO_FAV, payload: track.id })
+                        }
+                        style={{ color: favSongs?.includes(track.id) ? "red" : "white" }}
+                      >
                         <i className="far fa-heart"></i>
+                      </button>
+                      <button
+                        className="addToFav"
+                        onClick={() => dispatch({ type: ADD_TO_PLAYER, payload: track })}
+                      >
+                        <i class="far fa-play-circle"></i>
                       </button>
                     </Col>
                     <Col xs={10} className="ps-0 ">

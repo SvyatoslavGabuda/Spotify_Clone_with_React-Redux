@@ -17,7 +17,7 @@ function App() {
             <Col xs={2}>
               <SideBar />
             </Col>
-            <Col xs={12} md={9} className="mainPage offset-md-3">
+            <Col xs={12} md={9} className="mainPage offset-md-3 mb-5">
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/artist/:id" element={<ArtistPage />} />

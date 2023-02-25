@@ -7,6 +7,14 @@ export const ADD_TO_HIPHIP = "ADD_TO_HIPHIP";
 export const ADD_TO_FAV = "ADD_TO_FAV";
 export const REMOVE_FROM_FAV = "REMOVE_FROM_FAV";
 
+// const for SEARCREDUCER=>>>>>>>
+
+export const ADD_TO_SEARCH_RESULT = "ADD_TO_SEARCH_RESULT";
+
+// const for plyayer
+
+export const ADD_TO_PLAYER = "ADD_TO_PLAYER";
+
 let headers = new Headers({
   // sets the headers
   "X-RapidAPI-Host": "deezerdevs-deezer.p.rapidapi.com",
@@ -35,6 +43,33 @@ export const mainFetch = (artistName, TYPE) => {
       }
     } catch (err) {
       console.log(err);
+    }
+  };
+};
+
+export const searchFetch = (searchQuery) => {
+  return async (dispatch) => {
+    try {
+      console.log("dentro");
+      let response = await fetch(
+        "https://striveschool-api.herokuapp.com/api/deezer/search?q=" + searchQuery,
+        {
+          method: "GET",
+          headers,
+        }
+      );
+      if (response.ok) {
+        let res = await response.json();
+        console.log("res" + res);
+        dispatch({
+          type: ADD_TO_SEARCH_RESULT,
+          payload: res.data,
+        });
+      } else {
+        console.log("erroreee");
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 };

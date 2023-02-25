@@ -40,6 +40,7 @@ const Home = () => {
   const songsR = useSelector((state) => state.mainSongs.rockSongs);
   const songsP = useSelector((state) => state.mainSongs.popSongs);
   const songsH = useSelector((state) => state.mainSongs.hipHopSongs);
+  const songSearched = useSelector((state) => state.search.searchResult);
 
   useEffect(() => {
     rockRandomArtists.slice(0, 4).map((artist) => dispatc(mainFetch(artist, ADD_TO_ROCK)));
@@ -50,6 +51,7 @@ const Home = () => {
   return (
     <>
       <MainLinks />
+      {songSearched.length > 0 && <AlbumCardRow title="Search" songs={songSearched} id="rock" />}
       <AlbumCardRow title="Rock Classics" songs={songsR} id="rock" />
       <AlbumCardRow title="Pop Culture" songs={songsP} id="pop" />
       <AlbumCardRow title="#HipHop" songs={songsH} id="hiphop" />

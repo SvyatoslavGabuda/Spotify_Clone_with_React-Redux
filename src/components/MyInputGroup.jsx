@@ -1,58 +1,41 @@
-import { Button, Form } from "react-bootstrap";
+import { useState } from "react";
+import { Form, Col } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { searchFetch } from "../redux/actions/actions";
 
 const MyInputGroup = () => {
-  let headers = new Headers({
-    // sets the headers
-    "X-RapidAPI-Host": "deezerdevs-deezer.p.rapidapi.com",
-    "X-RapidAPI-Key": "9d408f0366mshab3b0fd8e5ecdf7p1b09f2jsne682a1797fa0",
-  });
-  // const search = async () => {
-  //   let div = document.querySelector("#searchResults .row");
-  //   div.innerHTML = "";
-  //   let searchQuery = document.querySelector("#searchField").value; // gets the value from the search box
-
-  //   if (searchQuery.length > 2) {
-  //     //if there's a value in the search box => fetch the information from rapidapi & display the result
-  //     document.querySelector("#searchResults").style.display = "block";
-
-  //     try {
-  //       let response = await fetch(
-  //         "https://striveschool-api.herokuapp.com/api/deezer/search?q=" + searchQuery,
-  //         {
-  //           method: "GET",
-  //           headers,
-  //         }
-  //       ); // gets the information
-
-  //       if (response.ok) {
-  //         let result = await response.json(); // transforms the response to json
-  //         let songs = result.data; // gets the songs info
-
-  //         for (let x = 0; x < result.data.length; x++) {
-  //           div.innerHTML += albumCard(result.data[x]);
-  //         }
-  //       } else {
-  //         console.log("error");
-  //       }
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   } else {
-  //     //else just hide the section!
-  //     document.querySelector("#searchResults").style.display = "none";
-  //   }
-  // };
-
+  const [value, setValue] = useState("");
+  const dispatch = useDispatch();
+  const handleSearch = (e) => {
+    e.preventDefault();
+    dispatch(searchFetch(value));
+    console.log("ciao");
+  };
   return (
     <>
-      <Form className="input-group mt-3">
-        <Form.Group className="">
-          <Form.Control type="text" placeholder="Search" id="searchField" className="mb-2" />
-        </Form.Group>
+      <Form className="input-group mt-3 row">
+        <Col xs={10} className="pe-0 rounded-start-2">
+          <Form.Group className="myForm">
+            <Form.Control
+              type="text"
+              placeholder="Search"
+              value={value}
+              id="searchField"
+              className=" h-100 rounded-start-2"
+              onChange={(e) => setValue(e.target.value)}
+            />
+          </Form.Group>
+        </Col>
 
-        <Button className="btn btn-outline-secondary btn-sm" type="button">
-          Go
-        </Button>
+        <Col xs={2} className="ps-0">
+          <button
+            className="btn btn-outline-secondary btn-sm h-100 rounded-end-2"
+            type="button"
+            onClick={(e) => handleSearch(e)}
+          >
+            Go
+          </button>
+        </Col>
       </Form>
     </>
   );
