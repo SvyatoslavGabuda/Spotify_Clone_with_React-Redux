@@ -4,7 +4,7 @@ import MyInputGroup from "./MyInputGroup";
 
 const SideBar = () => {
   const location = useLocation();
-  console.log(location);
+
   return (
     <>
       <Navbar
