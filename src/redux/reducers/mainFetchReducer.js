@@ -1,9 +1,16 @@
-import { ADD_TO_HIPHIP, ADD_TO_POP, ADD_TO_ROCK } from "../actions/actions";
+import {
+  ADD_TO_HIPHIP,
+  ADD_TO_POP,
+  ADD_TO_ROCK,
+  START_LOADING_MAIN,
+  STOP_LOADING_MAIN,
+} from "../actions/actions";
 
 const initialState = {
   rockSongs: [],
   popSongs: [],
   hipHopSongs: [],
+  loading: false,
 };
 
 export const mainFetchReducers = (state = initialState, action) => {
@@ -22,6 +29,16 @@ export const mainFetchReducers = (state = initialState, action) => {
       return {
         ...state,
         hipHopSongs: [...state.hipHopSongs, action.payload],
+      };
+    case START_LOADING_MAIN:
+      return {
+        ...state,
+        loading: true,
+      };
+    case STOP_LOADING_MAIN:
+      return {
+        ...state,
+        loading: false,
       };
 
     default:

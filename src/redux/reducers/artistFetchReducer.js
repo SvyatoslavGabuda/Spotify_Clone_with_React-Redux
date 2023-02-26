@@ -1,8 +1,14 @@
-import { ADD_TO_ARTISTSONGS, ARTIST } from "../actions/actions";
+import {
+  ADD_TO_ARTISTSONGS,
+  ARTIST,
+  START_LOADING_ARTIST,
+  STOP_LOADING_ARTIST,
+} from "../actions/actions";
 
 const initialState = {
   artistSongs: [],
   artist: [],
+  loading: false,
 };
 
 export const artistFetchReducers = (state = initialState, action) => {
@@ -16,6 +22,16 @@ export const artistFetchReducers = (state = initialState, action) => {
       return {
         ...state,
         artist: action.payload,
+      };
+    case START_LOADING_ARTIST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case STOP_LOADING_ARTIST:
+      return {
+        ...state,
+        loading: false,
       };
 
     default:

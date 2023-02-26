@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { artistFetch } from "../redux/actions/actions";
@@ -12,6 +12,7 @@ const ArtistPage = () => {
 
   const artist = useSelector((state) => state.artist.artist);
   const track = useSelector((state) => state.artist.artistSongs);
+  const loadingArt = useSelector((state) => state.artist.loading);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -38,6 +39,7 @@ const ArtistPage = () => {
         )}
       </Row>
       <Row className="mb-3">
+        {loadingArt && <Spinner animation="border" variant="light" />}
         {track && (
           <Col xs={10} className="offset-1 p-0">
             <div className="mt-4 d-flex justify-content-start">

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Col, Row } from "react-bootstrap";
+import { Col, Row, Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { ADD_TO_FAV, ADD_TO_PLAYER, albumFetch, REMOVE_FROM_FAV } from "../redux/actions/actions";
@@ -12,6 +12,7 @@ const AlbumPage = () => {
   const dispatch = useDispatch();
   const favSongs = useSelector((state) => state.fav.favSongs);
   const album = useSelector((state) => state.album.albumSongs);
+  const loadingAlbum = useSelector((state) => state.album.loading);
 
   useEffect(() => {
     dispatch(albumFetch(albumId));
@@ -19,6 +20,7 @@ const AlbumPage = () => {
   return (
     <>
       <MainLinks />
+
       <Row>
         <Col md={3} className=" pt-5 text-center" id="img-container">
           {album.title && (
@@ -41,6 +43,7 @@ const AlbumPage = () => {
         <Col md={8} className="p-5">
           <Row>
             <Col md={10} className="mb-5 w-100" id="trackList">
+              {loadingAlbum && <Spinner animation="border" variant="light" />}
               {album.title &&
                 album.tracks.data.map((track) => (
                   <Row key={track.id} className="justify-content-center w-100">

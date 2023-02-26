@@ -1,6 +1,8 @@
 export const ADD_TO_ROCK = "ADD_TO_ROCK";
 export const ADD_TO_POP = "ADD_TO_POP";
 export const ADD_TO_HIPHIP = "ADD_TO_HIPHIP";
+export const START_LOADING_MAIN = "START_LOADING_MAIN";
+export const STOP_LOADING_MAIN = "STOP_LOADING_MAIN";
 
 // const for FAVREDUCERS =>>>
 export const ADD_TO_FAV = "ADD_TO_FAV";
@@ -9,13 +11,19 @@ export const SAVE_TO_FAV = "SAVE_TO_FAV";
 export const REMOVE_FROM_SAVED = "REMOVE_FROM_SAVED";
 // const for SEARCREDUCER=>>>>>>>
 export const ADD_TO_SEARCH_RESULT = "ADD_TO_SEARCH_RESULT";
+export const START_LOADING_SEARCH = "START_LOADING_SEARCH";
+export const STOP_LOADING_SEARCH = "STOP_LOADING_SEARCH";
 // const for plyayer
 export const ADD_TO_PLAYER = "ADD_TO_PLAYER";
 //const for ARTISTREDUCE
 export const ADD_TO_ARTISTSONGS = "ADD_TO_ARTISTSONGS";
+export const START_LOADING_ARTIST = "START_LOADING_ARTIST";
+export const STOP_LOADING_ARTIST = "STOP_LOADING_ARTIST";
 export const ARTIST = "ARTIST";
 //const fo ALBUMREDUCE
 export const ADD_TO_ALBUM = "ADD_TO_ALBUM";
+export const START_LOADING_ALBUM = "START_LOADING_ALBUM";
+export const STOP_LOADING_ALBUM = "STOP_LOADING_ALBUM";
 
 // sets the headers
 let headers = new Headers({
@@ -25,6 +33,9 @@ let headers = new Headers({
 //fetch mainpage
 export const mainFetch = (artistName, TYPE) => {
   return async (dispatch) => {
+    dispatch({
+      type: START_LOADING_MAIN,
+    });
     try {
       let response = await fetch(
         "https://striveschool-api.herokuapp.com/api/deezer/search?q=" + artistName,
@@ -45,6 +56,10 @@ export const mainFetch = (artistName, TYPE) => {
       }
     } catch (err) {
       console.log(err);
+    } finally {
+      dispatch({
+        type: STOP_LOADING_MAIN,
+      });
     }
   };
 };
@@ -53,6 +68,9 @@ export const mainFetch = (artistName, TYPE) => {
 //nell altro un array di ogetti
 export const searchFetch = (searchQuery) => {
   return async (dispatch) => {
+    dispatch({
+      type: START_LOADING_SEARCH,
+    });
     try {
       console.log("dentro");
       let response = await fetch(
@@ -74,6 +92,10 @@ export const searchFetch = (searchQuery) => {
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      dispatch({
+        type: STOP_LOADING_SEARCH,
+      });
     }
   };
 };
@@ -81,6 +103,9 @@ export const searchFetch = (searchQuery) => {
 //fetch artisti
 export const artistFetch = (artistId) => {
   return async (dispatch) => {
+    dispatch({
+      type: START_LOADING_ARTIST,
+    });
     try {
       let response = await fetch(
         "https://striveschool-api.herokuapp.com/api/deezer/artist/" + artistId,
@@ -119,6 +144,10 @@ export const artistFetch = (artistId) => {
       }
     } catch (exception) {
       console.log(exception);
+    } finally {
+      dispatch({
+        type: STOP_LOADING_ARTIST,
+      });
     }
   };
 };
@@ -126,6 +155,9 @@ export const artistFetch = (artistId) => {
 
 export const albumFetch = (albumId) => {
   return async (dispatch) => {
+    dispatch({
+      type: START_LOADING_ALBUM,
+    });
     try {
       let response = await fetch(
         "https://striveschool-api.herokuapp.com/api/deezer/album/" + albumId,
@@ -148,6 +180,10 @@ export const albumFetch = (albumId) => {
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      dispatch({
+        type: STOP_LOADING_ALBUM,
+      });
     }
   };
 };

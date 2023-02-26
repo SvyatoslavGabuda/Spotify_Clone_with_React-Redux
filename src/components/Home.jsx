@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { ADD_TO_HIPHIP, ADD_TO_POP, ADD_TO_ROCK, mainFetch } from "../redux/actions/actions";
 import AlbumCardRow from "./AlbumCardRow";
@@ -42,6 +43,9 @@ const Home = () => {
   const songsH = useSelector((state) => state.mainSongs.hipHopSongs);
   const songSearched = useSelector((state) => state.search.searchResult);
 
+  const loadingS = useSelector((state) => state.search.loading);
+  const loadingM = useSelector((state) => state.mainSongs.loading);
+
   useEffect(() => {
     rockRandomArtists.slice(0, 4).map((artist) => dispatc(mainFetch(artist, ADD_TO_ROCK)));
     popRandomArtists.slice(0, 4).map((artist) => dispatc(mainFetch(artist, ADD_TO_POP)));
@@ -51,9 +55,13 @@ const Home = () => {
   return (
     <>
       <MainLinks />
+      {loadingS && <Spinner animation="border" variant="light" />}
       {songSearched.length > 0 && <AlbumCardRow title="Search" songs={songSearched} id="rock" />}
+      {loadingM && <Spinner animation="border" variant="light" />}
       <AlbumCardRow title="Rock Classics" songs={songsR} id="rock" />
+      {loadingM && <Spinner animation="border" variant="light" />}
       <AlbumCardRow title="Pop Culture" songs={songsP} id="pop" />
+      {loadingM && <Spinner animation="border" variant="light" />}
       <AlbumCardRow title="#HipHop" songs={songsH} id="hiphop" />
     </>
   );
