@@ -7,12 +7,7 @@ const SideBar = () => {
 
   return (
     <>
-      <Navbar
-        //  bg="light"
-        expand="md"
-        className=" bg-navbar fixed-left justify-content-between"
-        id="sidebar"
-      >
+      <Navbar expand="md" className=" bg-navbar fixed-left justify-content-between" id="sidebar">
         <Container className="nav-container flex-column">
           <Link to="/" className=" myLogo navbar-brand ">
             <img

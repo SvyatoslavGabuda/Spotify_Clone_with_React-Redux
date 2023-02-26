@@ -35,7 +35,7 @@ export const mainFetch = (artistName, TYPE) => {
       );
       if (response.ok) {
         let result = await response.json();
-        console.log(result);
+        // console.log(result);
         dispatch({
           type: TYPE,
           payload: result.data[0],

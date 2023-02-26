@@ -15,7 +15,6 @@ const AlbumCard = ({ song }) => {
   return (
     <>
       <Col className="text-center position-relative myCardSongs">
-        {/* <Link to={`/album/${song.album.id}`}> */}
         <img
           variant="top"
           className="img-fluid"
@@ -29,7 +28,6 @@ const AlbumCard = ({ song }) => {
           <i className="far fa-play-circle"></i>
         </span>
 
-        {/* // </Col></Link> */}
         <Row>
           <div>
             <Link to={`/album/${song.album.id}`} className="text-decoration-none">
@@ -40,7 +38,7 @@ const AlbumCard = ({ song }) => {
                   : song.album.title.substring(0, 12) + "..."}
               </p>
             </Link>
-            {/* <br /> */}
+
             <p className="d-flex justify-content-center align-items-center">
               <Link to={`/artist/${song.artist.id}`} className="text-decoration-none">
                 Artist: {song.artist.name}

@@ -9,7 +9,6 @@ const CardInArtist = ({ song }) => {
   return (
     <>
       <Col className="col-sm-auto text-center  mb-5 position-relative myCardSongs">
-        {/* <Link to={`/album/${song.album.id}`}> */}
         <img
           variant="top"
           className="img-fluid"
@@ -23,14 +22,13 @@ const CardInArtist = ({ song }) => {
           <i className="far fa-play-circle"></i>
         </span>
 
-        {/* </Link> */}
         <div>
           <Link to={`/`} className="text-decoration-none">
             <p className="m-0 ">
               track: {song.title.length < 16 ? song.title : song.title.substring(0, 16) + "..."}
             </p>
           </Link>
-          {/* <br /> */}
+
           <p className="d-flex justify-content-center align-items-center">
             <Link to={`/album/${song.album.id}`} className="text-decoration-none">
               Album:{" "}

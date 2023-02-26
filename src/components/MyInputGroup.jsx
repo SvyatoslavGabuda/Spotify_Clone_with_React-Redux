@@ -9,7 +9,6 @@ const MyInputGroup = () => {
   const handleSearch = (e) => {
     e.preventDefault();
     dispatch(searchFetch(value));
-    console.log("ciao");
   };
   return (
     <>
