@@ -2,7 +2,14 @@ import { useEffect } from "react";
 import { Col, Row, Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { ADD_TO_FAV, ADD_TO_PLAYER, albumFetch, REMOVE_FROM_FAV } from "../redux/actions/actions";
+import {
+  ADD_TO_FAV,
+  ADD_TO_PLAYER,
+  albumFetch,
+  REMOVE_FROM_FAV,
+  REMOVE_FROM_SAVED,
+  SAVE_TO_FAV,
+} from "../redux/actions/actions";
 import MainLinks from "./MainLinks";
 
 const AlbumPage = () => {
@@ -52,8 +59,10 @@ const AlbumPage = () => {
                         className="addToFav"
                         onClick={() =>
                           favSongs?.includes(track.id)
-                            ? dispatch({ type: REMOVE_FROM_FAV, payload: track.id })
-                            : dispatch({ type: ADD_TO_FAV, payload: track.id })
+                            ? (dispatch({ type: REMOVE_FROM_FAV, payload: track.id }),
+                              dispatch({ type: REMOVE_FROM_SAVED, payload: track.id }))
+                            : (dispatch({ type: ADD_TO_FAV, payload: track.id }),
+                              dispatch({ type: SAVE_TO_FAV, payload: track }))
                         }
                         style={{ color: favSongs?.includes(track.id) ? "red" : "white" }}
                       >

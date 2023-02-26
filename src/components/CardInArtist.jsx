@@ -1,7 +1,13 @@
 import { Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { ADD_TO_FAV, ADD_TO_PLAYER, REMOVE_FROM_FAV } from "../redux/actions/actions";
+import {
+  ADD_TO_FAV,
+  ADD_TO_PLAYER,
+  REMOVE_FROM_FAV,
+  REMOVE_FROM_SAVED,
+  SAVE_TO_FAV,
+} from "../redux/actions/actions";
 
 const CardInArtist = ({ song }) => {
   const dispatch = useDispatch();
@@ -40,8 +46,10 @@ const CardInArtist = ({ song }) => {
               className="addToFav"
               onClick={() =>
                 favSongs?.includes(song.id)
-                  ? dispatch({ type: REMOVE_FROM_FAV, payload: song.id })
-                  : dispatch({ type: ADD_TO_FAV, payload: song.id })
+                  ? (dispatch({ type: REMOVE_FROM_FAV, payload: song.id }),
+                    dispatch({ type: REMOVE_FROM_SAVED, payload: song.id }))
+                  : (dispatch({ type: ADD_TO_FAV, payload: song.id }),
+                    dispatch({ type: SAVE_TO_FAV, payload: song }))
               }
               style={{ color: favSongs?.includes(song.id) ? "red" : "white" }}
             >
