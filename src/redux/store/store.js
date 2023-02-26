@@ -2,6 +2,8 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { persistReducer, persistStore } from "redux-persist";
 import { encryptTransform } from "redux-persist-transform-encrypt";
 import storage from "redux-persist/lib/storage";
+import { albumFetchReducers } from "../reducers/albumFetchReducer";
+import { artistFetchReducers } from "../reducers/artistFetchReducer";
 import { favReducer } from "../reducers/favReducers";
 import { mainFetchReducers } from "../reducers/mainFetchReducer";
 import { playerReduce } from "../reducers/playerReducer";
@@ -25,6 +27,8 @@ const allReducer = combineReducers({
   fav: favReducer,
   search: searchReducer,
   player: playerReduce,
+  artist: artistFetchReducers,
+  album: albumFetchReducers,
 });
 const persistRed = persistReducer(configurePersist, allReducer);
 

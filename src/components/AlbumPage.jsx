@@ -1,52 +1,27 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Col, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { ADD_TO_FAV, ADD_TO_PLAYER, REMOVE_FROM_FAV } from "../redux/actions/actions";
+import { ADD_TO_FAV, ADD_TO_PLAYER, albumFetch, REMOVE_FROM_FAV } from "../redux/actions/actions";
 import MainLinks from "./MainLinks";
 
 const AlbumPage = () => {
   const params = useParams();
   const albumId = params.id;
-  const [album, setAlbum] = useState();
+
   const dispatch = useDispatch();
   const favSongs = useSelector((state) => state.fav.favSongs);
+  const album = useSelector((state) => state.album.albumSongs);
 
-  const AlbumFetch = async () => {
-    let headers = new Headers({
-      "X-RapidAPI-Host": "deezerdevs-deezer.p.rapidapi.com",
-      "X-RapidAPI-Key": "c74a0a086emshf55ffb8dbdcb59ap17a486jsnb83bb4d3e387",
-    });
-
-    try {
-      let response = await fetch(
-        "https://striveschool-api.herokuapp.com/api/deezer/album/" + albumId,
-        {
-          method: "GET",
-          headers,
-        }
-      );
-
-      if (response.ok) {
-        let album = await response.json();
-        console.log(album);
-        setAlbum(album);
-      } else {
-        console.log("errrore");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
   useEffect(() => {
-    AlbumFetch();
+    dispatch(albumFetch(albumId));
   }, []);
   return (
     <>
       <MainLinks />
       <Row>
         <Col md={3} className=" pt-5 text-center" id="img-container">
-          {album && (
+          {album.title && (
             <>
               <img src={album.cover} className="card-img img-fluid" alt="Album" />
               <div className="mt-4 text-center">
@@ -66,7 +41,7 @@ const AlbumPage = () => {
         <Col md={8} className="p-5">
           <Row>
             <Col md={10} className="mb-5 w-100" id="trackList">
-              {album &&
+              {album.title &&
                 album.tracks.data.map((track) => (
                   <Row key={track.id} className="justify-content-center w-100">
                     <Col xs={2} className="pe-0">
@@ -85,7 +60,7 @@ const AlbumPage = () => {
                         className="addToFav"
                         onClick={() => dispatch({ type: ADD_TO_PLAYER, payload: track })}
                       >
-                        <i class="far fa-play-circle"></i>
+                        <i className="far fa-play-circle"></i>
                       </button>
                     </Col>
                     <Col xs={10} className="ps-0 ">

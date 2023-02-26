@@ -12,16 +12,14 @@ const SideBar = () => {
         id="sidebar"
       >
         <Container className="nav-container flex-column">
-          <Link to="/">
-            <span className="navbar-brand">
-              <img
-                src="/assets/logo/Spotify_Logo.png"
-                width="131"
-                height="40"
-                className="d-inline-block align-top"
-                alt="SpotifyLogo"
-              />
-            </span>
+          <Link to="/" className=" myLogo navbar-brand ">
+            <img
+              src="/assets/logo/Spotify_Logo.png"
+              width="131"
+              height="40"
+              className="d-inline-block align-top"
+              alt="SpotifyLogo"
+            />
           </Link>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse className="collapse navbar-collapse" id="basic-navbar-nav">

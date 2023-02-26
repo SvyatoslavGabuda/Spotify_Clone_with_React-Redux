@@ -1,6 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { artistFetch } from "../redux/actions/actions";
 import CardInArtist from "./CardInArtist";
 import MainLinks from "./MainLinks";
 
@@ -8,54 +10,12 @@ const ArtistPage = () => {
   const params = useParams();
   const artistId = params.id;
 
-  const [artist, setArtist] = useState();
-  const [track, setTrack] = useState();
+  const artist = useSelector((state) => state.artist.artist);
+  const track = useSelector((state) => state.artist.artistSongs);
+  const dispatch = useDispatch();
 
-  const artistFetch = async () => {
-    let headers = new Headers({
-      "X-RapidAPI-Host": "deezerdevs-deezer.p.rapidapi.com",
-      "X-RapidAPI-Key": "222902beabmshb95a65b737cead6p1f3ac9jsn23ced94c0d20",
-    });
-
-    try {
-      let response = await fetch(
-        "https://striveschool-api.herokuapp.com/api/deezer/artist/" + artistId,
-        {
-          method: "GET",
-          headers,
-        }
-      );
-
-      if (response.ok) {
-        let artist = await response.json();
-
-        setArtist(artist);
-
-        let tracksResponse = await fetch(
-          "https://striveschool-api.herokuapp.com/api/deezer/search?q=" + artist.name,
-          {
-            method: "GET",
-            headers,
-          }
-        );
-
-        if (tracksResponse.ok) {
-          let tracklist = await tracksResponse.json();
-          setTrack(tracklist.data);
-        }
-      } else {
-        console.log("some problem");
-        // // something went wrong with the request --> i.e. headers missing, wrong HTTP Method
-        // document.querySelector("#apiLoaded").innerHTML = "NOT OK" + (await response.text());
-      }
-    } catch (exception) {
-      console.log(exception);
-      //   // ex.: Url is not correct, Internal Server Error
-      //   document.querySelector("#apiLoaded").innerHTML = exception;
-    }
-  };
   useEffect(() => {
-    artistFetch();
+    dispatch(artistFetch(artistId));
   }, []);
   return (
     <>

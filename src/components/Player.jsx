@@ -1,9 +1,27 @@
+import { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 
 const Player = () => {
   const songIn = useSelector((state) => state.player.songInPlay);
 
+  const [player, setPlayer] = useState(new Audio(songIn.preview));
+  const [playPause, setPlayPause] = useState(false);
+
+  const handlePlay = () => {
+    if (playPause) {
+      player.pause();
+      setPlayPause(false);
+    } else {
+      player.play();
+      setPlayPause(true);
+    }
+  };
+  useEffect(() => {
+    setPlayPause(false);
+    player.pause();
+    setPlayer(new Audio(songIn.preview));
+  }, [songIn]);
   return (
     <>
       <Container fluid className=" fixed-bottom bg-container pt-1">
@@ -25,8 +43,12 @@ const Player = () => {
                       <button>
                         <img src="/assets/playerbuttons/Previous.png" alt="shuffle" />
                       </button>
-                      <button>
-                        <img src="/assets/playerbuttons/Play.png" alt="shuffle" />
+                      <button onClick={() => handlePlay()}>
+                        {playPause ? (
+                          <i className="fas fa-pause"></i>
+                        ) : (
+                          <img src="/assets/playerbuttons/Play.png" alt="shuffle" />
+                        )}
                       </button>
                       <button>
                         <img src="/assets/playerbuttons/Next.png" alt="shuffle" />

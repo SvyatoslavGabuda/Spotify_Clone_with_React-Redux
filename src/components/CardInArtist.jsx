@@ -17,11 +17,13 @@ const CardInArtist = ({ song }) => {
           onClick={() => dispatch({ type: ADD_TO_PLAYER, payload: song })}
         />
         {/* </Link> */}
-        <p>
+        <div>
           <Link to={`/`} className="text-decoration-none">
-            track: {song.title.length < 16 ? song.title : song.title.substring(0, 16) + "..."}
+            <p className="m-0 ">
+              track: {song.title.length < 16 ? song.title : song.title.substring(0, 16) + "..."}
+            </p>
           </Link>
-          <br />
+          {/* <br /> */}
           <p className="d-flex justify-content-center align-items-center">
             <Link to={`/album/${song.album.id}`} className="text-decoration-none">
               Album:{" "}
@@ -41,7 +43,7 @@ const CardInArtist = ({ song }) => {
               <i className="far fa-heart"></i>
             </button>
           </p>
-        </p>
+        </div>
       </Col>
     </>
   );

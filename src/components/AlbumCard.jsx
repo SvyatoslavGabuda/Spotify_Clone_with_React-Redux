@@ -19,14 +19,16 @@ const AlbumCard = ({ song }) => {
 
         {/* // </Col></Link> */}
         <Row>
-          <p>
+          <div>
             <Link to={`/album/${song.album.id}`} className="text-decoration-none">
-              Album:{" "}
-              {song.album.title.length < 16
-                ? song.album.title
-                : song.album.title.substring(0, 12) + "..."}
+              <p className="m-0">
+                Album:{" "}
+                {song.album.title.length < 16
+                  ? song.album.title
+                  : song.album.title.substring(0, 12) + "..."}
+              </p>
             </Link>
-            <br />
+            {/* <br /> */}
             <p className="d-flex justify-content-center align-items-center">
               <Link to={`/artist/${song.artist.id}`} className="text-decoration-none">
                 Artist: {song.artist.name}
@@ -43,7 +45,7 @@ const AlbumCard = ({ song }) => {
                 <i className="far fa-heart"></i>
               </button>
             </p>
-          </p>
+          </div>
         </Row>
       </Col>
     </>

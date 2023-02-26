@@ -13,6 +13,10 @@
   border: none;
   padding: 0;
   width: 20px;
+  i {
+    margin-top: 1rem;
+    transform: translateY(3px);
+  }
 }
 .playerControls button img {
   width: 14px;
