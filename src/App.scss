@@ -14,3 +14,22 @@
 .myForm {
   border-radius: none;
 }
+.myCardSongs {
+  .myPlayIcon {
+    position: absolute;
+    right: 30%;
+    top: 10%;
+    color: rgb(60, 211, 60);
+    display: none;
+    font-size: 5em;
+  }
+  &:hover {
+    .myPlayIcon {
+      display: inline;
+      &:hover {
+        transition: transform 1s;
+        transform: scale(1.3);
+      }
+    }
+  }
+}

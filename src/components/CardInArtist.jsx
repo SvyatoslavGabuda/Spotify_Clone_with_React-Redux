@@ -8,7 +8,7 @@ const CardInArtist = ({ song }) => {
   const favSongs = useSelector((state) => state.fav.favSongs);
   return (
     <>
-      <Col className="col-sm-auto text-center  mb-5">
+      <Col className="col-sm-auto text-center  mb-5 position-relative myCardSongs">
         {/* <Link to={`/album/${song.album.id}`}> */}
         <img
           variant="top"
@@ -16,6 +16,13 @@ const CardInArtist = ({ song }) => {
           src={song.album.cover_medium}
           onClick={() => dispatch({ type: ADD_TO_PLAYER, payload: song })}
         />
+        <span
+          className="myPlayIcon"
+          onClick={() => dispatch({ type: ADD_TO_PLAYER, payload: song })}
+        >
+          <i className="far fa-play-circle"></i>
+        </span>
+
         {/* </Link> */}
         <div>
           <Link to={`/`} className="text-decoration-none">

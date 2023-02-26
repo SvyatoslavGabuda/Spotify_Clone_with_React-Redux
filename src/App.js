@@ -7,6 +7,7 @@ import ArtistPage from "./components/ArtistPage";
 import Home from "./components/Home";
 import Player from "./components/Player";
 import SideBar from "./components/SideBar";
+import YourLibrary from "./components/YourLibrary";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/artist/:id" element={<ArtistPage />} />
                 <Route path="/album/:id" element={<AlbumPage />} />
+                <Route path="/yourLibrary" element={<YourLibrary />} />
               </Routes>
             </Col>
           </Row>

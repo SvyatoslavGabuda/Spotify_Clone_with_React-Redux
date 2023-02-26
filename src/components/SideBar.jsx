@@ -1,8 +1,10 @@
 import { Button, Col, Container, Nav, Navbar } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import MyInputGroup from "./MyInputGroup";
 
 const SideBar = () => {
+  const location = useLocation();
+  console.log(location);
   return (
     <>
       <Navbar
@@ -27,12 +29,14 @@ const SideBar = () => {
               <Link to="/" className="nav-link">
                 <i className="fas fa-home fa-lg"></i>&nbsp; Home
               </Link>
-              <Nav.Link href="#link">
+
+              <Link to="/yourLibrary" className="nav-link">
                 <i className="fas fa-book-open fa-lg"></i>&nbsp; Your Library
-              </Nav.Link>
-              <Nav.Link href="#link">
+              </Link>
+
+              <span className={location.pathname === "/" ? "" : "d-none"}>
                 <MyInputGroup />
-              </Nav.Link>
+              </span>
             </Nav>
           </Navbar.Collapse>
         </Container>

@@ -5,6 +5,8 @@ export const ADD_TO_HIPHIP = "ADD_TO_HIPHIP";
 // const for FAVREDUCERS =>>>
 export const ADD_TO_FAV = "ADD_TO_FAV";
 export const REMOVE_FROM_FAV = "REMOVE_FROM_FAV";
+export const SAVE_TO_FAV = "SAVE_TO_FAV";
+export const REMOVE_FROM_SAVED = "REMOVE_FROM_SAVED";
 // const for SEARCREDUCER=>>>>>>>
 export const ADD_TO_SEARCH_RESULT = "ADD_TO_SEARCH_RESULT";
 // const for plyayer
@@ -14,12 +16,13 @@ export const ADD_TO_ARTISTSONGS = "ADD_TO_ARTISTSONGS";
 export const ARTIST = "ARTIST";
 //const fo ALBUMREDUCE
 export const ADD_TO_ALBUM = "ADD_TO_ALBUM";
+
 // sets the headers
 let headers = new Headers({
   "X-RapidAPI-Host": "deezerdevs-deezer.p.rapidapi.com",
   "X-RapidAPI-Key": "9d408f0366mshab3b0fd8e5ecdf7p1b09f2jsne682a1797fa0",
 });
-
+//fetch mainpage
 export const mainFetch = (artistName, TYPE) => {
   return async (dispatch) => {
     try {
